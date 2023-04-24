@@ -1,38 +1,74 @@
-const data = require('../config/data');
+const gameModel = require('../models/gameModel');
 
-exports.selectTopByPlaytime = (req, res) => {
-  // Access the data from the data.js file and manipulate it as needed
-  // ...
+exports.select_top_by_playtime = (req, res) => {
+  const options = {
+    genre: req.query.genre,
+    platform: req.query.platform,
+  };
+
+  const topGames = gameModel.select_top_by_playtime(options);
+  res.status(200).json(topGames);
 };
 
-exports.selectTopByPlayers = (req, res) => {
-  // Access the data from the data.js file and manipulate it as needed
-  // ...
+exports.select_top_by_players = (req, res) => {
+  const options = {
+    genre: req.query.genre,
+    platform: req.query.platform,
+  };
+
+  const topGames = gameModel.select_top_by_players(options);
+  res.status(200).json(topGames);
 };
 
 // ----- Crud functions ----------------------
 
 exports.createGame = (req, res) => {
-  // Create a new game in the data
-  // ...
+  const gameData = req.body;
+  const newGame = gameModel.createGame(gameData);
+  res.json(newGame);
 };
 
 exports.getGame = (req, res) => {
-  // Retrieve a single game from the data
-  // ...
+  const gameId = parseInt(req.params.id);
+  const game = gameModel.getGame(gameId);
+
+  if (!game) {
+    res.status(404).json({ message: 'Game not found' });
+    return;
+  }
+
+  res.status(200).json(game);
 };
 
 exports.getGames = (req, res) => {
-  // Retrieve all games from the data
-  // ...
+  const games = gameModel.getAllGames();
+  res.status(200).json(games);
 };
 
 exports.updateGame = (req, res) => {
-  // Update a game in the data
-  // ...
+  const gameId = parseInt(req.params.id);
+  const updatedGame = req.body;
+
+  const game = gameModel.updateGame(gameId, updatedGame);
+
+  if (!game) {
+    res.status(404).json({ message: 'Game not found' });
+    return;
+  }
+
+  res.status(200).json(game);
 };
 
 exports.deleteGame = (req, res) => {
-  // Delete a game from the data
-  // ...
+  const gameId = parseInt(req.params.id);
+
+  const deletedGame = gameModel.deleteGame(gameId);
+
+  if (!deletedGame) {
+    res.status(404).json({ message: 'Game not found' });
+    return;
+  }
+
+  res.status(200).json(deletedGame);
 };
+

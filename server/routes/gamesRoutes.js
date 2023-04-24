@@ -9,7 +9,7 @@ router.get('/games', gamesController.getGames);
 router.put('/games/:id', gamesController.updateGame);
 router.delete('/games/:id', gamesController.deleteGame);
 
-router.get('/select_top_by_playtime', gamesController.selectTopByPlaytime);
-router.get('/select_top_by_players', gamesController.selectTopByPlayers);
+router.get('/select_top_by_playtime', gamesController.select_top_by_playtime);
+router.get('/select_top_by_players', gamesController.select_top_by_players);
 
 module.exports = router;
