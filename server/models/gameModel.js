@@ -49,7 +49,7 @@ exports.select_top_by_players = (options = {}) => {
 exports.createGame = (gameData) => {
 
   const newGame = {
-    userId: gameData.userId,
+    userId: gameData.length + 1,
     game: gameData.game,
     playTime: gameData.playTime,
     genre: gameData.genre,

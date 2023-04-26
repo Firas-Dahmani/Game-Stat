@@ -9,5 +9,4 @@ describe('Games API', () => {
     expect(res.body.length).toBeGreaterThan(0);
   });
 
-  // Add more tests for other API endpoints like POST /games, PUT /games/:id, DELETE /games/:id, etc.
 });

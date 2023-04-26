@@ -1,0 +1,13 @@
+.games-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .games-list {
+    gap: 0.5rem;
+  }
+}

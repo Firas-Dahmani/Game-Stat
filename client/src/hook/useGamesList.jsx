@@ -1,0 +1,29 @@
+import { useState, useEffect } from 'react';
+
+const useGamesList = (url) => {
+  const [games, setGames] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Error fetching data');
+        }
+        const data = await response.json();
+        setGames(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [url]);
+
+  return { games, loading, error };
+};
+
+export default useGamesList;

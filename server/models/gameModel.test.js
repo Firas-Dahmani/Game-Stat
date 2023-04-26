@@ -27,5 +27,4 @@ describe('Game Model', () => {
     expect(games.length).toBeGreaterThan(0);
   });
 
-  // Add more tests for updateGame, deleteGame, select_top_by_playtime, and select_top_by_players
 });
