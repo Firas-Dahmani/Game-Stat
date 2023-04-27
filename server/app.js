@@ -5,7 +5,7 @@ var app = express()
 
 
 const corsOptions = {
-  origin: 'https://your-netlify-domain.netlify.app',
+  origin: 'https://game-status.netlify.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
