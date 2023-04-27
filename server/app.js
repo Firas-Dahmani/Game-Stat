@@ -3,7 +3,13 @@ const gameRoutes = require('./routes/gamesRoutes.js');
 var cors = require('cors')
 var app = express()
 
-app.use(cors())
+
+const corsOptions = {
+  origin: 'https://your-netlify-domain.netlify.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+app.use(cors(corsOptions))
 
 app.use(express.json());
 
