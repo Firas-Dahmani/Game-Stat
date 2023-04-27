@@ -1,4 +1,4 @@
-const data = require('../config/data');
+let data = require('../config/data');
 
 exports.select_top_by_playtime = (options = {}) => {
   const { genre, platform } = options;
@@ -18,40 +18,45 @@ exports.select_top_by_playtime = (options = {}) => {
   return filteredGames;
 };
 
-const countUniquePlayers = (game) => {
-  const uniquePlayers = new Set();
-  game.forEach((player) => {
-    uniquePlayers.add(player.userId);
-  });
-  return uniquePlayers.size;
-};
-
 exports.select_top_by_players = (options = {}) => {
   const { genre, platform } = options;
 
-  let filteredGames = data.slice();
+  let filteredData = data;
 
   if (genre) {
-    filteredGames = filteredGames.filter(game => game.genre === genre);
+    filteredData = filteredData.filter((game) => game.genre === genre);
   }
 
   if (platform) {
-    filteredGames = filteredGames.filter(game => game.platforms.includes(platform));
+    filteredData = filteredData.filter((game) =>
+      game.platforms.includes(platform)
+    );
   }
 
-  filteredGames.sort((a, b) => countUniquePlayers(b) - countUniquePlayers(a));
+  const playersCount = {};
 
-  return filteredGames;
+  filteredData.forEach((game) => {
+    if (playersCount[game.game]) {
+      playersCount[game.game].players.add(game.userId);
+    } else {
+      playersCount[game.game] = { ...game, players: new Set([game.userId]) };
+    }
+  });
+
+  const topGamesByPlayers = Object.values(playersCount)
+    .map((game) => ({ ...game, players: game.players.size }))
+    .sort((a, b) => b.players - a.players);
+
+  return topGamesByPlayers;
 };
-
 // ----------- CRUD Logic --------------------
 
 exports.createGame = (gameData) => {
 
   const newGame = {
-    userId: gameData.length + 1,
+    userId: data.length + 1,
     game: gameData.game,
-    playTime: gameData.playTime,
+    playTime: 0,
     genre: gameData.genre,
     platforms: gameData.platforms,
   };
@@ -80,15 +85,17 @@ exports.updateGame = (gameId, updatedGame) => {
   return data[index];
 };
 
-exports.deleteGame = (gameId) => {
-  const index = data.findIndex(game => game.userId === gameId);
+
+//the userId is not unique
+exports.deleteGame = (id) => {
+  const index = data.findIndex(game => game.userId === id);
 
   if (index === -1) {
     return null;
   }
 
-  const deletedGame = data[index];
-  data.splice(index, 1);
-  return deletedGame;
+  const deletedGame = data.splice(index, 1)[0];
+
+  return deletedGame
 };
 

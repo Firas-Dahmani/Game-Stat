@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "test": "jest",
+    "test-watch": "jest --watch",
+    "watch": "nodemon app.js",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",

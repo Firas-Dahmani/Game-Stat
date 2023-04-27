@@ -61,6 +61,7 @@ exports.updateGame = (req, res) => {
 
 exports.deleteGame = (req, res) => {
   const gameId = parseInt(req.params.id);
+  console.log(gameId);
 
   const deletedGame = gameModel.deleteGame(gameId);
 

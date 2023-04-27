@@ -11,6 +11,6 @@ app.use(express.json());
 app.use('/api', gameRoutes);
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
+module.exports = app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });

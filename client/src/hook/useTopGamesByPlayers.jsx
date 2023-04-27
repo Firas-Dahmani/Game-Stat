@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const useTopGamesByPlayers = (url) => {
-  const [topGames, setTopGames] = useState([]);
+  const [games, setTopGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -23,7 +23,7 @@ const useTopGamesByPlayers = (url) => {
     fetchData();
   }, [url]);
 
-  return { topGames, loading, error };
+  return { games, loading, error };
 };
 
 export default useTopGamesByPlayers;

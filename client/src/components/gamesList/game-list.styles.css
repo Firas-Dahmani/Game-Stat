@@ -1,13 +1,21 @@
 .games-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
   justify-content: center;
-  padding: 1rem;
+  align-items: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .games-list {
-    gap: 0.5rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .games-list {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

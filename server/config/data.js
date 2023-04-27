@@ -1,5 +1,4 @@
-const data = [
-  {
+const data = [{
     userId: 8,
     game: "League of legends",
     playTime: 500,
@@ -40,6 +39,13 @@ const data = [
     playTime: 5000,
     genre: "Multiplayer",
     platforms: ["PC", "Android"],
+  },
+  {
+    userId: 3,
+    game: "World of warcraft",
+    playTime: 1500,
+    genre: "MMORPG",
+    platforms: ["PC"],
   },
   {
     userId: 2,

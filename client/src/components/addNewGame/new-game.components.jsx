@@ -1,44 +1,55 @@
 import React, { useState } from 'react';
-import './new-game.styles.css';
-import useAddNewGame from './../../hook/useAddNewGame';
+import './new-game.styles.css'
+import useAddNewGame from '../../hook/useAddNewGame';
 
 const AddNewGame = () => {
   const { addNewGame, error } = useAddNewGame('/api/games');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addNewGame(gameData);
-  };
-
-  if (error) return <div>Error: {error}</div>;
-
   const [gameData, setGameData] = useState({
+    userId:'',
     game: '',
     genre: '',
-    platforms: '',
+    platforms: [],
   });
 
   const handleChange = (e) => {
-    setGameData({ ...gameData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (name === 'platforms') {
+      const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
+      setGameData({ ...gameData, [name]: selectedOptions });
+    } else {
+      setGameData({ ...gameData, [name]: value });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    await addNewGame(gameData);
   };
 
   return (
-    <div className="add-game">
+    <div className="add-new-game">
       <h2>Add New Game</h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          Game Name:
-          <input type="text" name="game" value={gameData.game} onChange={handleChange} required />
-        </label>
-        <label>
-          Genre:
-          <input type="text" name="genre" value={gameData.genre} onChange={handleChange} required />
-        </label>
-        <label>
-          Platforms:
-          <input type="text" name="platforms" value={gameData.platforms} onChange={handleChange} required />
-        </label>
-        <button type="submit">Add Game</button>
+        <div className="form-group">
+          <label htmlFor="game">Game</label>
+          <input type="text" name="game" id="game" onChange={handleChange} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="genre">Genre</label>
+          <input type="text" name="genre" id="genre" onChange={handleChange} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="platforms">Platforms</label>
+          <select name="platforms" id="platforms" multiple onChange={handleChange}>
+            <option value="PC">PC</option>
+            <option value="PS4">PS4</option>
+            <option value="XBOX">XBOX</option>
+            <option value="Switch">Switch</option>
+            <option value="Android">Android</option>
+            <option value="iOS">iOS</option>
+          </select>
+        </div>
+        <button className='btn' type="submit">Add Game</button>
       </form>
     </div>
   );
