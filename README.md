@@ -11,11 +11,7 @@
   <br>
   
   <br>
-  <a href="#">View Demo</a>
-  ·
-  <a href="#">Report Bug</a>
-  ·
-  <a href="#">Request Feature</a>
+  <a href="https://game-status.herokuapp.com">View Demo</a>
 </p>
 
 ## Table of Contents
