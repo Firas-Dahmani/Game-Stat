@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import './new-game.styles.css'
 import useAddNewGame from '../../hook/useAddNewGame';
+import { API_URL } from '../../utils/api';
 
 const AddNewGame = () => {
-  const { addNewGame, error } = useAddNewGame('/api/games');
+  const { addNewGame, error } = useAddNewGame(`${API_URL}/games`);
   const [gameData, setGameData] = useState({
     userId:'',
     game: '',

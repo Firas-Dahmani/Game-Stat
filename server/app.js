@@ -1,22 +1,18 @@
+require('dotenv').config()
 const express = require('express');
 const gameRoutes = require('./routes/gamesRoutes.js');
-var cors = require('cors')
-var app = express()
+const cors = require('cors')
+const app = express()
 
 
-const corsOptions = {
-  origin: 'https://game-status.netlify.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-};
-app.use(cors(corsOptions))
+app.use(cors())
 
 app.use(express.json());
 
 app.use(express.json());
 app.use('/api', gameRoutes);
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8000;
 module.exports = app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
