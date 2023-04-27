@@ -1,1 +1,1 @@
-export const API_URL = 'https://game-status.herokuapp.com/api'
+export const API_URL = 'api'
